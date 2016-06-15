@@ -13,19 +13,12 @@ TABS.ports.initialize = function (callback, scrollPosition) {
          {name: 'TELEMETRY_FRSKY',      groups: ['telemetry'], sharableWith: ['msp'], notSharableWith: ['blackbox'], maxPorts: 1},
          {name: 'TELEMETRY_HOTT',       groups: ['telemetry'], sharableWith: ['msp'], notSharableWith: ['blackbox'], maxPorts: 1},
          {name: 'TELEMETRY_SMARTPORT',  groups: ['telemetry'], maxPorts: 1},
+         {name: 'TELEMETRY_LTM',        groups: ['telemetry'], sharableWith: ['msp'], notSharableWith: ['blackbox'], maxPorts: 1},
          {name: 'RX_SERIAL',            groups: ['rx'], maxPorts: 1},
          {name: 'BLACKBOX',             groups: ['logging', 'blackbox'], sharableWith: ['msp'], notSharableWith: ['telemetry'], maxPorts: 1},
     ];
 
-    if (semver.gte(CONFIG.apiVersion, "1.15.0")) {
-        var ltmFunctionRule = {name: 'TELEMETRY_LTM',        groups: ['telemetry'], sharableWith: ['msp'], notSharableWith: ['blackbox'], maxPorts: 1};
-        functionRules.push(ltmFunctionRule);
-    } else {
-        var mspFunctionRule = {name: 'TELEMETRY_MSP',        groups: ['telemetry'], sharableWith: ['msp'], notSharableWith: ['blackbox'], maxPorts: 1};
-        functionRules.push(mspFunctionRule);
-    }
-
-    if (semver.gte(CONFIG.apiVersion, "1.18.0")) {
+    if (semver.gte(CONFIG.flightControllerVersion, "1.1.0")) {
         var mavlinkFunctionRule = {name: 'TELEMETRY_MAVLINK',    groups: ['telemetry'], sharableWith: ['msp'], notSharableWith: ['blackbox'], maxPorts: 1};
         functionRules.push(mavlinkFunctionRule);
     }
